@@ -7,7 +7,8 @@
     <title>Enhanced Responsive Design</title>
     <style>
         :root {
-            --sidebar-width: calc(10vw + 50px);;
+            --sidebar-width: calc(10vw + 50px);
+            ;
             --primary-color: #5D1049;
             --sidebar-color: #F3F3F3;
             --content-bg: #FFFFFF;
@@ -54,9 +55,12 @@
 
         .sidebar {
             position: fixed;
-            width: var(--sidebar-width); /* Responsive width */
-            max-width: 200px; /* Maximum width */
-            min-width: 100px; /* Minimum width */
+            width: var(--sidebar-width);
+            /* Responsive width */
+            max-width: 200px;
+            /* Maximum width */
+            min-width: 100px;
+            /* Minimum width */
             top: 50px;
             left: 0;
             background-color: var(--sidebar-color);
@@ -64,11 +68,15 @@
             overflow-y: auto;
             box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
             z-index: 500;
-            
+            text-align: center;
             padding: 10px;
             box-sizing: border-box;
         }
-        
+
+        .sidebar ul {
+        text-align: left;
+        }
+
 
         .content-wrap {
             margin-top: 10px;
@@ -100,45 +108,62 @@
         }
 
         @media screen and (max-width: 600px) {
+
             .sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
+                position: relative;
+                /* Remove the fixed positioning */
+                bottom: auto;
+                /* Reset bottom positioning */
+                left: auto;
+                /* Reset left positioning */
+                right: auto;
+                /* Reset right positioning */
+                min-width: 200px;
+                /* Allow it to take the natural content width or full width */
+                max-width: none;
+                /* Remove the max-width restriction */
+                margin: 20px auto;
+                /* Add some top margin and center it horizontally */
+                box-shadow: none;
+                /* Remove the box shadow as it becomes a normal document flow element */
+                order: 3;
+                /* Ensure it is positioned at the bottom if using flexbox layout */
+                height: 100px;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
                 justify-content: center;
-                padding: 20px 0;
-                box-sizing: border-box;
-                order: 2;
-                flex-basis: 100%;
+                text-align: center;
                 padding-bottom: 60px;
             }
 
             .sidebar ul {
-                width: 100%;
-                padding: 0;
-                margin: 0;
-                list-style-type: none;
                 display: flex;
-                flex-direction: row;
                 justify-content: center;
-                flex-wrap: wrap;
+                /* Keep the list centered */
+                padding: 0;
+                margin: 0 auto;
+                /* Center the list within the sidebar */
+                list-style-type: none;
+                flex-direction: row;
+                /* Stack the list items vertically */
             }
 
             .sidebar ul li {
-                display: inline-block;
-                margin: 0 10px;
+                margin: 5px 0;
+                /* Adjust vertical margin for list items */
             }
 
             .content-wrap {
-                margin-bottom: 0;
-                order: 1;
-                margin-left: 10px;
+                order: 2;
+                /* Ensure this comes before the sidebar when using flexbox layout */
+                padding-bottom: 20px;
+                /* Adjust bottom padding to ensure spacing below content */
+                margin-left: auto;
             }
 
-            body {
-                padding-top: 0;
+            .footer {
+                order: 4;
+                /* Ensure the footer comes last */
             }
         }
     </style>
@@ -154,6 +179,7 @@
         <ul>
             <li><a href="https://google.com">Link1</a></li>
             <li>Link 2</li>
+            
         </ul>
     </div>
 
@@ -166,7 +192,7 @@
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </footer>
 
-    
+
 
     <script>
         function generateContent() {
