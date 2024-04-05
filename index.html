@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Responsive Design</title>
+    <style>
+        :root {
+            --sidebar-width: calc(10vw + 50px);;
+            --primary-color: #5D1049;
+            --sidebar-color: #F3F3F3;
+            --content-bg: #FFFFFF;
+            --text-color: #333;
+            --dark-bg: #000000;
+            --dark-text: #F5F5F5;
+            --dark-sidebar: #333333;
+            --dark-border: #474747;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background-color: var(--content-bg);
+            color: var(--text-color);
+            padding-top: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header,
+        .footer {
+            position: fixed;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .header {
+            top: 0;
+            left: 0;
+        }
+
+        .footer {
+            bottom: 0;
+            left: 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: var(--sidebar-width); /* Responsive width */
+            max-width: 200px; /* Maximum width */
+            min-width: 100px; /* Minimum width */
+            top: 50px;
+            left: 0;
+            background-color: var(--sidebar-color);
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 500;
+            
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+
+        .content-wrap {
+            margin-top: 10px;
+            padding: 20px;
+            margin-left: max(160px, 15vw);
+            flex-grow: 1;
+            background-color: var(--content-bg);
+            padding-bottom: 60px;
+        }
+
+        .doctitle {
+            text-align: center;
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            border: 1px solid var(--dark-border);
+        }
+
+        .dark-mode .sidebar {
+            background-color: var(--dark-sidebar);
+        }
+
+        .dark-mode .content-wrap {
+            background-color: var(--dark-bg);
+            border-left: 1px solid var(--dark-border);
+        }
+
+        @media screen and (max-width: 600px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+                box-sizing: border-box;
+                order: 2;
+                flex-basis: 100%;
+                padding-bottom: 60px;
+            }
+
+            .sidebar ul {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .sidebar ul li {
+                display: inline-block;
+                margin: 0 10px;
+            }
+
+            .content-wrap {
+                margin-bottom: 0;
+                order: 1;
+                margin-left: 10px;
+            }
+
+            body {
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        This is your fixed header.
+    </header>
+
+    <div class="sidebar">
+        Sidebar Content
+        <ul>
+            <li><a href="https://google.com">Link1</a></li>
+            <li>Link 2</li>
+        </ul>
+    </div>
+
+    <div class="content-wrap" id="dynamicContent">
+        <!-- JavaScript-generated content -->
+    </div>
+
+    <footer class="footer">
+        This is your fixed footer.
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </footer>
+
+    
+
+    <script>
+        function generateContent() {
+            var dynamicContent = document.getElementById('dynamicContent');
+            dynamicContent.innerHTML += '<h1 class="doctitle">Title</h1>';
+            for (let i = 0; i < 100; i++) {
+                dynamicContent.innerHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>';
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        generateContent();
+    </script>
+</body>
+
+</html>
